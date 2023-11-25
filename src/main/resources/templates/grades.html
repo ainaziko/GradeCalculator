@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Contact List</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    </head>
+
+    <body>
+        <h1 style="text-align: center">Meine kleine Notenverwaltung</h1>
+        <br/><br/>
+        <div style="text-align: center">
+            <table style="margin: 0 auto; border: solid 2px black; border-collapse: collapse;" >
+                <tr style="border: 1px solid black; padding: 3px;" >
+                    <th style="border: 1px solid black; padding: 3px;"  width="100" height="50">Id</th>
+                    <th style="border: 1px solid black; padding: 3px;" width="350" height="50">Lecture</th>
+                    <th style="border: 1px solid black; padding: 3px;" width="200" height="50">Grade</th>
+                    <!--			<th>Edit</th>-->
+                </tr>
+                <tr style="border: 1px solid black; padding: 3px;" th:each ="gradeObj : ${listAllGrades}">
+                    <td style="border: 1px solid black; padding: 3px;" width="100" height="50" th:utext="${gradeObj.id}">...</td>
+                    <td style="border: 1px solid black; padding: 3px;" width="350" height="50" th:utext="${gradeObj.lecture}">...</td>
+                    <td style="border: 1px solid black; padding: 3px;" width="200" height="50" th:utext="${gradeObj.gradeNote}">...</td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <div style="font-size: 30px; text-align: center;">
+                <p style="display: inline-block">Notendurchschnitt:</p>
+                <p style="display: inline-block" th:text="${average}" ></p>
+            </div>
+        </div>
+
+        <br/><br/>
+        <div>
+            <div class="container mt-5 mb-5" >
+                <p style="text-align:center; font-size:24px ">Neue Noten eingeben</p>
+                <form style="text-align:center" method="post" th:action="@{/add}" th:object="${gradeAdd}" class="col card p-3 mb-5">
+                    <div class="form-group">
+                        <p style="   font-size:18px; font-weight:bold">Vorlesung:</p>
+                        <input style=" margin-bottom: 15px;  height:60px; "  size="100" id="firstName" placeholder="Enter lecture" required type="text" field="*{lecture}" name="lecture">
+                               class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <p style=" font-size:18px; font-weight:bold">Note:</p>
+                        <input style=" margin-bottom: 15px; height:60px;"  size="100" id="lastName" placeholder="Enter grade" required type="text" field="*{gradeNote}" name="gradeNote"
+                               class="form-control"/>
+                        <input type="hidden" id="id" field="*{id}" name="id">
+                    </div>
+                    <input   size="30px"style="background:#3630a3;color:white; height: 45px" type="submit" class="btn btn-primary" value="Note eintragen">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
